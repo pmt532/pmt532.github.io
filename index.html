@@ -1,30 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My First Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tamim | Portfolio</title>
+
+  <style>
+    :root{
+      --bg: #263526;            /* deep olive */
+      --bg2:#2f3e2f;            /* dark olive */
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: #f2f2ec;          /* off-white */
+      --muted: rgba(242,242,236,0.78);
+      --gold: #c9b458;          /* soft gold accent */
+      --shadow: 0 14px 40px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(1200px 600px at 15% 10%, var(--bg2), var(--bg));
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: var(--gold); }
+
+    /* Layout */
+    .container{
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 22px 0 70px;
+    }
+
+    /* Top nav */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(38,53,38,0.60);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner{
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201,180,88,0.12);
+    }
+
+    .nav-links{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a{
+      font-size: 14px;
+      opacity: 0.9;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover{
+      border-color: rgba(201,180,88,0.45);
+      background: rgba(201,180,88,0.08);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-main:before{
+      content:"";
+      position:absolute;
+      inset:-80px -80px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 30% 30%, rgba(201,180,88,0.22), transparent 60%);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 6px 10px;
+      border: 1px solid rgba(201,180,88,0.35);
+      background: rgba(201,180,88,0.10);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text);
+      opacity: 0.95;
+    }
+    .kicker span { color: var(--gold); font-weight: 700; }
+
+    h1{
+      margin: 14px 0 8px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: 0.2px;
+      line-height: 1.15;
+    }
+    .subtitle{
+      margin: 0 0 14px;
+      color: var(--muted);
+      max-width: 60ch;
+      font-size: 15px;
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(201,180,88,0.55);
+      background: rgba(201,180,88,0.12);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn:hover{
+      background: rgba(201,180,88,0.18);
+      transform: translateY(-1px);
+      color: var(--text);
+    }
+    .btn.secondary{
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06);
+      font-weight: 600;
+    }
+    .btn.secondary:hover{
+      background: rgba(255,255,255,0.10);
+      color: var(--gold);
+    }
+
+    .hero-side{
+      padding: 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .profile{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      padding: 14px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .avatar{
+      width: 86px; height: 86px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(201,180,88,0.7);
+      background: rgba(0,0,0,0.2);
+      flex: 0 0 auto;
+    }
+    .profile h2{
+      margin: 0;
+      font-size: 16px;
+    }
+    .profile p{
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .quick{
+      padding: 14px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .quick-title{
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 0.2px;
+    }
+    .quick-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .quick-grid strong{
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Sections */
+    section{
+      margin-top: 18px;
+    }
+    .section-card{
+      padding: 20px;
+    }
+    .section-title{
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--gold);
+      letter-spacing: 0.2px;
+    }
+    .section-text{
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* Grid blocks */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .mini{
+      padding: 14px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .mini h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .mini p{
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Skills pills */
+    .pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      font-size: 13px;
+      color: var(--text);
+      opacity: 0.95;
+    }
+    .pill.gold{
+      border-color: rgba(201,180,88,0.45);
+      background: rgba(201,180,88,0.10);
+    }
+
+    /* Projects */
+    .project{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .project-top{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,180,88,0.35);
+      background: rgba(201,180,88,0.08);
+      color: var(--text);
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+    .project a{
+      border-bottom: 1px dashed rgba(242,242,236,0.55);
+      width: fit-content;
+    }
+    .project a:hover{
+      border-bottom-color: var(--gold);
+    }
+
+    /* Contact */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .contact-item{
+      padding: 14px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .contact-item p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .contact-item a{
+      display:inline-block;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      text-align: center;
+      color: rgba(242,242,236,0.65);
+      font-size: 12px;
+      padding: 18px 0 0;
+    }
+
+    /* Back to top */
+    .top-btn{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display:none;
+      z-index: 60;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(201,180,88,0.55);
+      background: rgba(201,180,88,0.14);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+    }
+    .top-btn:hover{ background: rgba(201,180,88,0.20); }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
-<h1>Welcome to My Website!</h1>
-<p>Hello! My name is Tameem Alboainin and this is my first website.</p>
-<h2>About Me</h2>
-<p>I am studying Computer Science at the University of York.</p>
-<h2>My Interests</h2>
-<ul>
-<li>Web Development</li>
-<li>Photography</li>
-<li>Music</li>
-</ul>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="dot"></div>
+        <span>Tamim</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#interests">Interests</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card hero-main">
+        <div class="kicker">Live on <span>GitHub Pages</span> • Clean dark-olive theme</div>
+
+        <h1>Hi, I’m <span style="color: var(--gold);">Tamim</span> 👋</h1>
+        <p class="subtitle">
+          This is my personal website made with HTML. I’m practicing editing files, committing changes,
+          and publishing a live website using GitHub Pages.
+        </p>
+
+        <div class="buttons">
+          <a class="btn" href="https://gravatar.com/tameemalboaini" target="_blank">My Gravatar</a>
+          <a class="btn secondary" href="https://www.york.ac.uk" target="_blank">University of York</a>
+          <a class="btn secondary" href="#projects">See Projects</a>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <div class="profile">
+          <img class="avatar" src="<img src="https://gravatar.com/userimage/276615618/37ceb35891321a6487cb6c31488dd0a8.jpeg?v=1769516739000&size=256" alt="My profile picture" width="200">" alt="Profile photo">
+          <div>
+            <h2>Computer Science Student</h2>
+            <p>Learning web development • Building simple, clean pages</p>
+          </div>
+        </div>
+
+        <div class="quick">
+          <p class="quick-title">Quick Info</p>
+          <div class="quick-grid">
+            <div><strong>Theme:</strong> Dark Olive + Off-white</div>
+            <div><strong>Tools:</strong> GitHub + HTML</div>
+            <div><strong>Goal:</strong> Simple & professional layout</div>
+          </div>
+        </div>
+
+        <div class="quick">
+          <p class="quick-title">Navigation Tip</p>
+          <div class="quick-grid">
+            <div>Use the top menu to jump between sections.</div>
+            <div>Every edit needs a commit to appear live.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="card section-card">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-text">
+        Hello! I’m Tamim. I’m learning web development and how to publish websites online.
+        This page is a structured single-page layout with sections, cards, and a clean style.
+      </p>
+
+      <div class="grid-2">
+        <div class="mini">
+          <h3>What I’m learning</h3>
+          <p>HTML structure, links, images, styling, and how GitHub Pages deployment works.</p>
+        </div>
+        <div class="mini">
+          <h3>What I want to improve</h3>
+          <p>Better layouts, cleaner design, and creating multiple pages for a small website.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="card section-card">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-text">
+        These are simple skills I’m building as I learn. (Edit these anytime.)
+      </p>
+
+      <div class="pills">
+        <span class="pill gold">HTML</span>
+        <span class="pill">GitHub</span>
+        <span class="pill">Git (basic)</span>
+        <span class="pill">Web Pages</span>
+        <span class="pill">Problem Solving</span>
+        <span class="pill">Learning & Improving</span>
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+    <section id="interests" class="card section-card">
+      <h2 class="section-title">Interests</h2>
+      <p class="section-text">A few things I like (you can add/remove items easily).</p>
+
+      <div class="grid-3">
+        <div class="mini">
+          <h3>Photography</h3>
+          <p>I enjoy capturing moments and experimenting with angles and lighting.</p>
+        </div>
+        <div class="mini">
+          <h3>Music</h3>
+          <p>Music helps me focus and stay motivated while studying.</p>
+        </div>
+        <div class="mini">
+          <h3>Technology</h3>
+          <p>I like learning how systems work and building small projects step by step.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="card section-card">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-text">
+        Add your real projects here. If you don’t have many yet, that’s fine — keep it honest and simple.
+      </p>
+
+      <div class="grid-2">
+        <div class="mini project">
+          <div class="project-top">
+            <h3>GitHub Pages Website</h3>
+            <span class="tag">HTML • GitHub Pages</span>
+          </div>
+          <p>This website: a clean single-page layout with sections, navigation, and a premium theme.</p>
+          <a href="https://gravatar.com/tameemalboaini" target="_blank">Related profile link</a>
+        </div>
+
+        <div class="mini project">
+          <div class="project-top">
+            <h3>Future Project</h3>
+            <span class="tag">Coming soon</span>
+          </div>
+          <p>Add a small project here later (example: a simple About page or a mini gallery page).</p>
+          <a href="#contact">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card section-card">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-text">
+        Keep contact simple. A profile link is enough for this practical.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p><strong>Gravatar Profile</strong></p>
+          <p>My public profile link.</p>
+          <a href="https://gravatar.com/tameemalboaini" target="_blank">Open Gravatar →</a>
+        </div>
+
+        <div class="contact-item">
+          <p><strong>University</strong></p>
+          <p>My university website (example link).</p>
+          <a href="https://www.york.ac.uk" target="_blank">Open York →</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Tamim • Built with GitHub Pages
+    </footer>
+  </main>
+
+  <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
+
+  <script>
+    // Set year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Back-to-top button
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => {
+      topBtn.style.display = window.scrollY > 500 ? "block" : "none";
+    });
+    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  </script>
 </body>
 </html>
- <p>My profile: 
-        <a href="https://gravatar.com/tameemalboaini" target="_blank">
-            My Gravatar
-        </a>
-    </p>
 
-</body>
-<img src="https://gravatar.com/userimage/276615618/37ceb35891321a6487cb6c31488dd0a8.jpeg?v=1769516739000&size=256" alt="My profile picture" width="200">
 
 

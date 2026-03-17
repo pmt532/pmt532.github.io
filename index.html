@@ -338,6 +338,315 @@
       background: rgba(201,180,88,0.10);
     }
 
-    .
+    .project{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
+    .project-top{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,180,88,0.35);
+      background: rgba(201,180,88,0.08);
+      color: var(--text);
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+
+    .project a{
+      border-bottom: 1px dashed rgba(242,242,236,0.55);
+      width: fit-content;
+    }
+
+    .project a:hover{
+      border-bottom-color: var(--gold);
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .contact-item{
+      padding: 14px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .contact-item p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .contact-item a{
+      display:inline-block;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    footer{
+      margin-top: 18px;
+      text-align: center;
+      color: rgba(242,242,236,0.65);
+      font-size: 12px;
+      padding: 18px 0 0;
+    }
+
+    .top-btn{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display:none;
+      z-index: 60;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(201,180,88,0.55);
+      background: rgba(201,180,88,0.14);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+    }
+
+    .top-btn:hover{
+      background: rgba(201,180,88,0.20);
+    }
+
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="dot"></div>
+        <span>Tamim</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#interests">Interests</a>
+        <a href="#projects">Projects</a>
+        <a href="#production-diary">Diary</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="hero">
+      <div class="card hero-main">
+        <div class="kicker">Live on <span>GitHub Pages</span> • Personal portfolio</div>
+
+        <h1>Hi, I’m <span style="color: var(--gold);">Tamim</span> 👋</h1>
+        <p class="subtitle">
+          This is my personal portfolio website. I built it using HTML and I am using it to practise web development, page structure, and publishing through GitHub Pages.
+        </p>
+
+        <div class="buttons">
+          <a class="btn" href="https://gravatar.com/tameemalboaini" target="_blank">My Gravatar</a>
+          <a class="btn secondary" href="https://www.york.ac.uk" target="_blank">University of York</a>
+          <a class="btn secondary" href="#projects">See Projects</a>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <div class="profile">
+          <img class="avatar" src="https://www.gravatar.com/avatar/2b33b4801c70491ba204d6d7490b4747cde8079e44138585883b306377ebbcb3?size=256&d=identicon" alt="Profile photo">
+          <div>
+            <h2>Computer Science Student</h2>
+            <p>Learning web development and building simple, well-structured pages.</p>
+          </div>
+        </div>
+
+        <div class="quick">
+          <p class="quick-title">Technical Focus</p>
+          <div class="quick-grid">
+            <div><strong>Web Fundamentals:</strong> HTML structure and layout.</div>
+            <div><strong>Version Control:</strong> GitHub workflow and publishing updates.</div>
+            <div><strong>Development:</strong> Improving page organisation and clarity.</div>
+          </div>
+        </div>
+
+        <div class="quick">
+          <p class="quick-title">Current Goals</p>
+          <div class="quick-grid">
+            <div>Improve design consistency across sections.</div>
+            <div>Add more developed project content.</div>
+            <div>Continue learning basic front-end development.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="card section-card">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-text">
+        Hello, I’m Tamim. I am learning web development and how to publish websites online. This portfolio shows my progress in building structured pages and presenting my work clearly.
+      </p>
+
+      <div class="grid-2">
+        <div class="mini">
+          <h3>What I am learning</h3>
+          <p>HTML structure, links, images, styling, and how GitHub Pages works.</p>
+        </div>
+        <div class="mini">
+          <h3>What I want to improve</h3>
+          <p>Better layouts, stronger project presentation, and more consistent design.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="card section-card">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-text">
+        These are some of the areas I am currently developing.
+      </p>
+
+      <div class="pills">
+        <span class="pill gold">HTML</span>
+        <span class="pill">GitHub</span>
+        <span class="pill">Git (basic)</span>
+        <span class="pill">Web Design</span>
+        <span class="pill">Problem Solving</span>
+        <span class="pill">Page Structure</span>
+      </div>
+    </section>
+
+    <section id="interests" class="card section-card">
+      <h2 class="section-title">Interests</h2>
+      <p class="section-text">A few areas that interest me.</p>
+
+      <div class="grid-3">
+        <div class="mini">
+          <h3>Photography</h3>
+          <p>I enjoy capturing moments and experimenting with angles and lighting.</p>
+        </div>
+        <div class="mini">
+          <h3>Music</h3>
+          <p>Music helps me focus and stay motivated while studying.</p>
+        </div>
+        <div class="mini">
+          <h3>Technology</h3>
+          <p>I like learning how systems work and building projects step by step.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="card section-card">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-text">
+        These are some of the main pieces of work I have developed so far.
+      </p>
+
+      <div class="grid-2">
+        <div class="mini project">
+          <div class="project-top">
+            <h3>GitHub Pages Portfolio Website</h3>
+            <span class="tag">HTML • GitHub Pages</span>
+          </div>
+          <p>I created this website as part of my portfolio work. I focused on page structure, layout, styling, and publishing it online using GitHub Pages.</p>
+          <a href="https://gravatar.com/tameemalboaini" target="_blank">Related profile link</a>
+        </div>
+
+        <div class="mini project">
+          <div class="project-top">
+            <h3>Portfolio Development</h3>
+            <span class="tag">Ongoing</span>
+          </div>
+          <p>This work involves improving the organisation and design of my portfolio. I have also been learning how to edit HTML files and update the live site through GitHub.</p>
+          <a href="#production-diary">See progress diary</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card section-card">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-text">
+        You can view my public profile using the link below.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p><strong>Gravatar Profile</strong></p>
+          <p>This is my public profile page.</p>
+          <a href="https://gravatar.com/tameemalboaini" target="_blank">Open Gravatar →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="production-diary" class="card section-card">
+      <h2 class="section-title">Production diary – Week 15</h2>
+      <p class="section-text"><strong>Date:</strong> 10 February 2026</p>
+
+      <div class="grid-2">
+        <div class="mini">
+          <h3>What I built or changed</h3>
+          <p>This week I continued developing my portfolio website. I improved the structure of the main sections, updated the design, and made the page look more organised.</p>
+        </div>
+
+        <div class="mini">
+          <h3>What I am most proud of</h3>
+          <p>I am most proud of the Projects section because it now looks clearer and more professional than before.</p>
+        </div>
+
+        <div class="mini">
+          <h3>What I found challenging</h3>
+          <p>I found GitHub difficult at first, especially understanding how to commit and push changes correctly so they appear on the live website.</p>
+        </div>
+
+        <div class="mini">
+          <h3>What I learned</h3>
+          <p>I learned more about HTML structure, page sections, and how layout can affect the overall appearance of a website.</p>
+        </div>
+      </div>
+
+      <div class="mini" style="margin-top:14px;">
+        <h3>Next step</h3>
+        <p>Next week I want to improve the consistency of the design and continue developing my portfolio content.</p>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Tamim • Built with GitHub Pages
+    </footer>
+  </main>
+
+  <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => {
+      topBtn.style.display = window.scrollY > 500 ? "block" : "none";
+    });
+
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
 

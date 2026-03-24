@@ -372,29 +372,69 @@
       border-bottom-color: var(--gold);
     }
 
-    .contact-grid{
-      display:grid;
+    .contact-form{
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .form-row{
+      display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 12px;
+      gap: 12px;
     }
 
-    .contact-item{
-      padding: 14px;
-      background: var(--card2);
+    .form-group{
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label{
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
       border: 1px solid var(--border);
-      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      outline: none;
     }
 
-    .contact-item p{
-      margin: 0;
-      color: var(--muted);
+    .form-group input::placeholder,
+    .form-group textarea::placeholder{
+      color: rgba(242,242,236,0.55);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus{
+      border-color: rgba(201,180,88,0.55);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .form-group textarea{
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-note{
+      margin-top: 6px;
       font-size: 13px;
+      color: var(--muted);
     }
 
-    .contact-item a{
-      display:inline-block;
+    .form-status{
       margin-top: 8px;
+      font-size: 14px;
+      color: var(--gold);
       font-weight: 700;
     }
 
@@ -430,7 +470,7 @@
       .hero{ grid-template-columns: 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
       .grid-2{ grid-template-columns: 1fr; }
-      .contact-grid{ grid-template-columns: 1fr; }
+      .form-row{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -584,16 +624,31 @@
     <section id="contact" class="card section-card">
       <h2 class="section-title">Contact</h2>
       <p class="section-text">
-        You can view my public profile using the link below.
+        You can send a message using the form below.
       </p>
 
-      <div class="contact-grid">
-        <div class="contact-item">
-          <p><strong>Gravatar Profile</strong></p>
-          <p>This is my public profile page.</p>
-          <a href="https://gravatar.com/tameemalboaini" target="_blank">Open Gravatar →</a>
+      <form id="contactForm" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          </div>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message here" required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Send Message</button>
+        <p class="form-note">This form is ready for the front-end design. It can later be connected to Supabase for live submissions and email notifications.</p>
+        <p id="formStatus" class="form-status"></p>
+      </form>
     </section>
 
     <section id="production-diary" class="card section-card">
@@ -646,7 +701,15 @@
     topBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+
+    contactForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      formStatus.textContent = "Message submitted successfully.";
+      contactForm.reset();
+    });
   </script>
 </body>
 </html>
-

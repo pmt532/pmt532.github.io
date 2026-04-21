@@ -735,14 +735,16 @@
         ])
       });
 
-      if (response.ok) {
-        formStatus.textContent = "Message sent successfully.";
-        contactForm.reset();
-      } else {
-        const errorText = await response.text();
-        console.error("Supabase error:", errorText);
-        formStatus.textContent = "Error sending message.";
-      }
+      const resultText = await response.text();
+console.log("Status:", response.status);
+console.log("Response text:", resultText);
+
+if (response.ok) {
+  formStatus.textContent = "Message sent successfully. Status: " + response.status;
+  contactForm.reset();
+} else {
+  formStatus.textContent = "Error sending message. Status: " + response.status;
+}
 
     } catch (error) {
       console.error("Connection error:", error);

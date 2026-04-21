@@ -691,58 +691,64 @@
   <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    const topBtn = document.getElementById("topBtn");
-    window.addEventListener("scroll", () => {
-      topBtn.style.display = window.scrollY > 500 ? "block" : "none";
-    });
+  const topBtn = document.getElementById("topBtn");
+  window.addEventListener("scroll", () => {
+    topBtn.style.display = window.scrollY > 500 ? "block" : "none";
+  });
 
-    topBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+  topBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-    const SUPABASE_URL = "https://netvasubvxbckmnvzipb.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ldHZhc3VidnhiY2ttbnZ6aXBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NzA1MzUsImV4cCI6MjA5MjM0NjUzNX0.oI0HWKiokQADJQtaenvGVZ_LBcWXUkd-LCuZNTqzS-Q";
+  const SUPABASE_URL = "https://netvasubvxbckmnvzipb.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ldHZhc3VidnhiY2ttbnZ6aXBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NzA1MzUsImV4cCI6MjA5MjM0NjUzNX0.oI0HWKiokQADJQtaenvGVZ_LBcWXUkd-LCuZNTqzS-Q";
 
-const contactForm = document.getElementById("contactForm");
-const formStatus = document.getElementById("formStatus");
+  const contactForm = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
 
-contactForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
+  contactForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const message = document.getElementById("message").value;
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-  formStatus.textContent = "Sending...";
+    formStatus.textContent = "Sending...";
 
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_KEY,
-        "Authorization": `Bearer ${SUPABASE_KEY}`
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        message: message
-      })
-    });
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify([
+          {
+            name: name,
+            email: email,
+            message: message
+          }
+        ])
+      });
 
-    if (response.ok) {
-      formStatus.textContent = "Message sent successfully.";
-      contactForm.reset();
-    } else {
-      formStatus.textContent = "Error sending message.";
+      if (response.ok) {
+        formStatus.textContent = "Message sent successfully.";
+        contactForm.reset();
+      } else {
+        const errorText = await response.text();
+        console.error("Supabase error:", errorText);
+        formStatus.textContent = "Error sending message.";
+      }
+
+    } catch (error) {
+      console.error("Connection error:", error);
+      formStatus.textContent = "Connection error.";
     }
-
-  } catch (error) {
-    formStatus.textContent = "Connection error.";
-  }
-});
-  </script>
+  });
+</script>
 </body>
 </html>

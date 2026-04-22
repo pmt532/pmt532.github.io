@@ -471,16 +471,15 @@
       .grid-3{ grid-template-columns: 1fr; }
       .grid-2{ grid-template-columns: 1fr; }
       .form-row{ grid-template-columns: 1fr; }
-      .visual-grid{
+.visual-grid{
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 18px;
   margin-top: 12px;
 }
 
 .media-video{
   width: 100%;
-  aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
   background: #000;
@@ -488,9 +487,11 @@
 
 .media-video video{
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
 }
 
 .media-caption{
@@ -625,7 +626,36 @@
         </div>
       </div>
     </section>
+<section id="visual-work" class="card section-card">
+  <h2 class="section-title">Visual Work</h2>
+  <p class="section-text">
+    These short videos reflect my interest in photography and places that are meaningful to me.
+  </p>
 
+<div class="mini">
+  <h3>Life in York</h3>
+  <div class="media-video">
+    <video controls muted playsinline>
+      <source src="york.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <p class="media-caption">A short video capturing the atmosphere of York, where I study.</p>
+</div>
+
+<div class="mini">
+  <h3>Cultural Perspective</h3>
+  <div class="media-video">
+    <video controls muted playsinline>
+      <source src="qatar.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <p class="media-caption">A short video reflecting my interest in photography and my cultural background.</p>
+</div>
+  </div>
+</section>
+  
     <section id="projects" class="card section-card">
       <h2 class="section-title">Projects</h2>
       <p class="section-text">
@@ -719,36 +749,7 @@
       © <span id="year"></span> Tamim • Built with GitHub Pages
     </footer>
   </main>
-<section id="visual-work" class="card section-card">
-  <h2 class="section-title">Visual Work</h2>
-  <p class="section-text">
-    These short videos reflect my interest in photography and places that are meaningful to me.
-  </p>
 
-  <div class="visual-grid">
-    <div class="mini">
-      <h3>Life in York</h3>
-      <div class="media-video">
-        <video controls muted playsinline>
-          <source src="york.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <p class="media-caption">A short video capturing the atmosphere of York, where I study.</p>
-    </div>
-
-    <div class="mini">
-      <h3>Cultural Perspective</h3>
-      <div class="media-video">
-        <video controls muted playsinline>
-          <source src="qatar.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <p class="media-caption">A short video reflecting my interest in photography and my cultural background.</p>
-    </div>
-  </div>
-</section>
   <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
 
   <script>

@@ -529,7 +529,20 @@
   font-size: 16px;
   color: var(--muted);
 }
+.interest-images{
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
 
+.interest-images img{
+  width: 95px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
 .interest-link{
   display: inline-block;
   margin-top: 10px;
@@ -623,7 +636,6 @@
         <a href="#skills">Skills</a>
         <a href="#interests">Interests</a>
         <a href="#projects">Projects</a>
-        <a href="#production-diary">Diary</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -679,9 +691,9 @@
 
     <section id="about" class="card section-card">
       <h2 class="section-title">About Me</h2>
-      <p class="section-text">
-        Hello, I’m Tamim. I am learning web development and how to publish websites online. This portfolio shows my progress in building structured pages and presenting my work clearly.
-      </p>
+      <p>
+  My interests outside of coursework include photography, music, outdoor activities, and creative projects that allow me to explore ideas in a more personal and visual way.
+</p>
 
       <div class="grid-2">
         <div class="mini">
@@ -739,7 +751,19 @@
     I enjoy working on creative digital projects that allow me to combine design, organisation, and interactive ideas.
   </p>
 </div>
-      </div>
+        <div class="mini">
+  <h3>Casual Adventures</h3>
+
+  <p>
+    I enjoy trying different activities and experiences, especially the kind that let me get out, explore new places, and do something a little different from my usual routine.
+  </p>
+
+  <div class="interest-images">
+    <img src="paddle-board.jpg" alt="Paddle boarding activity">
+    <img src="casual-adventure.jpg" alt="Outdoor activity">
+  </div>
+</div>
+</div>
     </section>
 <section id="visual-work" class="card section-card">
   <h2 class="section-title">Visual Work</h2>
@@ -855,38 +879,6 @@ Filmed inside the National Museum of Qatar, reflecting parts of Qatari culture, 
         <p>This form is connected to a database using Supabase and stores submitted messages securely.</p>
         <p id="formStatus" class="form-status"></p>
       </form>
-    </section>
-
-    <section id="production-diary" class="card section-card">
-      <h2 class="section-title">Production diary – Week 15</h2>
-      <p class="section-text"><strong>Date:</strong> 10 February 2026</p>
-
-      <div class="grid-2">
-        <div class="mini">
-          <h3>What I built or changed</h3>
-          <p>This week I continued developing my portfolio website. I improved the structure of the main sections, updated the design, and made the page look more organised.</p>
-        </div>
-
-        <div class="mini">
-          <h3>What I am most proud of</h3>
-          <p>I am most proud of the Projects section because it now looks clearer and more professional than before.</p>
-        </div>
-
-        <div class="mini">
-          <h3>What I found challenging</h3>
-          <p>I found GitHub difficult at first, especially understanding how to commit and push changes correctly so they appear on the live website.</p>
-        </div>
-
-        <div class="mini">
-          <h3>What I learned</h3>
-          <p>I learned more about HTML structure, page sections, and how layout can affect the overall appearance of a website.</p>
-        </div>
-      </div>
-
-      <div class="mini" style="margin-top:14px;">
-        <h3>Next step</h3>
-        <p>Next week I want to improve the consistency of the design and continue developing my portfolio content.</p>
-      </div>
     </section>
 
     <footer>

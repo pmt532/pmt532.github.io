@@ -105,7 +105,32 @@
   object-fit: cover;
   display: block;
 }
+.image-popup{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
 
+.image-popup img{
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,0.12);
+}
+
+.close-popup{
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 42px;
+  color: white;
+  cursor: pointer;
+}
 @media (max-width: 900px){
   .cover-image{
     height: 180px;
@@ -759,8 +784,8 @@
   </p>
 
   <div class="interest-images">
-    <img src="paddle-board.jpg" alt="Paddle boarding activity">
-    <img src="casual-adventure.jpg" alt="Outdoor activity">
+   <img src="paddle-board.jpg" alt="Paddle boarding activity" onclick="openImage(this.src)">
+<img src="casual-adventure.jpg" alt="Outdoor activity" onclick="openImage(this.src)">
   </div>
 </div>
 </div>
@@ -1021,6 +1046,21 @@ window.addEventListener("load", () => {
  document.getElementById("playlistResults").style.display = "none";
 document.getElementById("playlistStats").innerHTML = "Explore my playlist.";
 });
+</script>
+  <div id="imagePopup" class="image-popup">
+  <span class="close-popup" onclick="closeImage()">×</span>
+
+  <img id="popupImage" src="" alt="Expanded image">
+</div>
+  <script>
+function openImage(src){
+  document.getElementById("imagePopup").style.display = "flex";
+  document.getElementById("popupImage").src = src;
+}
+
+function closeImage(){
+  document.getElementById("imagePopup").style.display = "none";
+}
 </script>
 </body>
 </html>

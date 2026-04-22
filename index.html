@@ -689,23 +689,25 @@
   </main>
 <section style="margin-top:30px;">
   <div style="width:100%; background:black;">
-   <video controls preload="auto" style="width:100%; display:block; background:black;">
-  <source src="york.mp4" type="video/mp4">
-</video>
+    <video id="yorkVideo" controls preload="auto" style="width:100%; display:block; background:black;">
+      <source src="york.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
-    📍 Life in York — click to enable sound
+    📍 Life in York
   </p>
 
   <div style="width:100%; background:black; margin-top:30px;">
-    <video controls preload="auto" style="width:100%; display:block; background:black;">
-<source src="qatar.mp4" type="video/mp4">
-</video>
+    <video id="qatarVideo" controls preload="auto" style="width:100%; display:block; background:black;">
+      <source src="qatar.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
-    🇶🇦 Cultural perspective — click to enable sound
+    🇶🇦 Cultural perspective
   </p>
 </section>
   <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
@@ -727,6 +729,68 @@
 
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
+
+  contactForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    formStatus.textContent = "Sending...";
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify([
+          {
+            name: name,
+            email: email,
+            message: message
+          }
+        ])
+      });
+
+      const resultText = await response.text();
+      console.log("Status:", response.status);
+      console.log("Response text:", resultText);
+
+      if (response.ok) {
+        formStatus.textContent = "Your message has been sent successfully.";
+        contactForm.reset();
+      } else {
+        formStatus.textContent = "There was a problem sending your message. Please try again.";
+      }
+
+    } catch (error) {
+      console.error("Connection error:", error);
+      formStatus.textContent = "Connection error.";
+    }
+  });
+
+  window.addEventListener("load", () => {
+    const yorkVideo = document.getElementById("yorkVideo");
+    const qatarVideo = document.getElementById("qatarVideo");
+
+    if (yorkVideo) {
+      yorkVideo.addEventListener("click", () => {
+        yorkVideo.play().catch(() => {});
+      });
+    }
+
+    if (qatarVideo) {
+      qatarVideo.addEventListener("click", () => {
+        qatarVideo.play().catch(() => {});
+      });
+    }
+  });
+</script>
 
   contactForm.addEventListener("submit", async function(event) {
     event.preventDefault();

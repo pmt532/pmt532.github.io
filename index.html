@@ -495,7 +495,6 @@
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 14px;
 }
 
 .media-caption{
@@ -504,10 +503,23 @@
   color: var(--muted);
 }
 
+.interest-link{
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(201,180,88,0.45);
+  background: rgba(201,180,88,0.10);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 @media (max-width: 900px){
-  .visual-grid{
-    grid-template-columns: 1fr;
-  }
+  .hero{ grid-template-columns: 1fr; }
+  .grid-3{ grid-template-columns: 1fr; }
+  .grid-2{ grid-template-columns: 1fr; }
+  .form-row{ grid-template-columns: 1fr; }
 }
   </style>
 </head>
@@ -615,11 +627,11 @@
       <h2 class="section-title">Interests</h2>
       <p class="section-text">A few areas that interest me.</p>
 
-      <div class="grid-3">
-        <div class="mini">
-          <h3>Photography</h3>
-          <p>I enjoy capturing moments and experimenting with angles and lighting.</p>
-        </div>
+     <div class="mini">
+  <h3>Photography</h3>
+  <p>I enjoy capturing places and moments that feel meaningful to me.</p>
+  <a class="interest-link" href="#visual-work">See visual work</a>
+</div>
         <div class="mini">
           <h3>Music</h3>
           <p>Music helps me focus and stay motivated while studying.</p>
@@ -633,21 +645,19 @@
 <section id="visual-work" class="card section-card">
   <h2 class="section-title">Visual Work</h2>
   <p class="section-text">
-    These short videos reflect my interest in photography and places that are meaningful to me.
+    These videos connect with my interest in photography and show places that matter to me.
   </p>
 
   <div class="visual-grid">
-
     <div class="media-card">
       <h3>Life in York</h3>
       <div class="media-video">
         <video controls muted playsinline>
           <source src="york.mp4" type="video/mp4">
+          Your browser does not support the video tag.
         </video>
       </div>
-      <p class="media-caption">
-        A short video capturing the atmosphere of York, where I study.
-      </p>
+      <p class="media-caption">A short video capturing part of York, where I study.</p>
     </div>
 
     <div class="media-card">
@@ -655,13 +665,11 @@
       <div class="media-video">
         <video controls muted playsinline>
           <source src="qatar.mp4" type="video/mp4">
+          Your browser does not support the video tag.
         </video>
       </div>
-      <p class="media-caption">
-        A short video reflecting my interest in photography and my cultural background.
-      </p>
+      <p class="media-caption">A short video from Qatar that reflects my interest in photography and my background.</p>
     </div>
-
   </div>
 </section>
   

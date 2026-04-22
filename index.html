@@ -508,7 +508,69 @@
   font-size: 13px;
   font-weight: 700;
 }
+.playlist-box{
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
 
+.playlist-controls{
+  display: grid;
+  gap: 10px;
+}
+
+.playlist-controls input,
+.playlist-controls select{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+}
+
+.playlist-controls input::placeholder{
+  color: rgba(242,242,236,0.55);
+}
+
+.playlist-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.playlist-stats{
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.playlist-stats strong{
+  color: var(--text);
+}
+
+.playlist-results{
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+}
+
+.playlist-results ul{
+  margin: 0;
+  padding-left: 18px;
+}
+
+.playlist-results li{
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
 @media (max-width: 900px){
   .hero{ grid-template-columns: 1fr; }
   .grid-3{ grid-template-columns: 1fr; }
@@ -692,14 +754,42 @@ Filmed inside the National Museum of Qatar🇶🇦, reflecting parts of Qatari c
         </div>
 
         <div class="mini project">
-          <div class="project-top">
-            <h3>Portfolio Development</h3>
-            <span class="tag">Ongoing</span>
-          </div>
-          <p>This work involves improving the organisation and design of my portfolio. I have also been learning how to edit HTML files and update the live site through GitHub.</p>
-          <a href="#production-diary">See progress diary</a>
-        </div>
-      </div>
+  <div class="project-top">
+    <h3>Music Playlist Analyzer</h3>
+    <span class="tag">Interactive Demo</span>
+  </div>
+
+  <p>
+    A small playlist demo that lets the user search, filter, and sort songs while viewing simple playlist statistics.
+  </p>
+
+  <div class="playlist-box">
+    <div class="playlist-controls">
+      <input type="text" id="songSearch" placeholder="Search by title or artist">
+
+    <select id="genreFilter">
+  <option value="all">All genres</option>
+  <option value="Pop">Pop</option>
+  <option value="Arabic">Arabic</option>
+  <option value="Rap">Rap</option>
+</select>
+
+      <select id="sortOption">
+        <option value="title">Sort by title</option>
+        <option value="plays">Sort by play count</option>
+        <option value="duration">Sort by duration</option>
+      </select>
+    </div>
+
+    <div class="playlist-actions">
+      <button class="btn" type="button" onclick="runPlaylistAnalyzer()">Show Results</button>
+      <button class="btn secondary" type="button" onclick="resetPlaylistAnalyzer()">Reset</button>
+    </div>
+
+    <div id="playlistStats" class="playlist-stats"></div>
+    <div id="playlistResults" class="playlist-results"></div>
+  </div>
+</div>
     </section>
 
     <section id="contact" class="card section-card">
@@ -829,6 +919,99 @@ Filmed inside the National Museum of Qatar🇶🇦, reflecting parts of Qatari c
       formStatus.textContent = "Connection error.";
     }
   });
+ const playlistData = [
+  { title: "Wildflower", artist: "Billie Eilish", genre: "Pop", duration: 240, plays: 14 },
+  { title: "Soutak Yenadini", artist: "Mohammed Abdu", genre: "Arabic", duration: 300, plays: 22 },
+  { title: "God's Plan", artist: "Drake", genre: "Rap", duration: 198, plays: 19 },
+  { title: "Oqouba", artist: "Assala Nasri", genre: "Arabic", duration: 260, plays: 17 },
+  { title: "Blinding Lights", artist: "The Weeknd", genre: "Pop", duration: 200, plays: 21 },
+  { title: "Lose Yourself", artist: "Eminem", genre: "Rap", duration: 326, plays: 20 },
+  { title: "Sayeq Alkhair", artist: "Mohammed Abdu", genre: "Arabic", duration: 280, plays: 18 },
+  { title: "Lovely", artist: "Billie Eilish", genre: "Pop", duration: 200, plays: 16 },
+  { title: "Hotline Bling", artist: "Drake", genre: "Rap", duration: 267, plays: 15 },
+  { title: "Tagharabna", artist: "Abdul Majeed Abdullah", genre: "Arabic", duration: 270, plays: 19 },
+  { title: "Someone Like You", artist: "Adele", genre: "Pop", duration: 285, plays: 17 },
+  { title: "The Real Slim Shady", artist: "Eminem", genre: "Rap", duration: 284, plays: 14 },
+  { title: "Tabaadna", artist: "Mohammed Abdu", genre: "Arabic", duration: 310, plays: 20 },
+  { title: "Die With A Smile", artist: "Lady Gaga & Bruno Mars", genre: "Pop", duration: 230, plays: 16 },
+  { title: "Ghayeb Habibi", artist: "Assala Nasri", genre: "Arabic", duration: 250, plays: 15 },
+  { title: "Shape of You", artist: "Ed Sheeran", genre: "Pop", duration: 233, plays: 18 }
+];
+
+function formatDuration(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remaining = seconds % 60;
+  return `${minutes}m ${remaining}s`;
+}
+
+function renderPlaylist(items) {
+  const statsBox = document.getElementById("playlistStats");
+  const resultsBox = document.getElementById("playlistResults");
+
+  if (!items.length) {
+    statsBox.innerHTML = "<strong>No matching songs found.</strong>";
+    resultsBox.innerHTML = "";
+    return;
+  }
+
+  const totalSongs = items.length;
+  const totalPlays = items.reduce((sum, song) => sum + song.plays, 0);
+  const topSong = items.reduce((top, song) => song.plays > top.plays ? song : top, items[0]);
+
+  statsBox.innerHTML = `
+    <strong>Total songs:</strong> ${totalSongs}<br>
+    <strong>Total plays:</strong> ${totalPlays}<br>
+    <strong>Most played:</strong> ${topSong.title} by ${topSong.artist}
+  `;
+
+  const listItems = items.map(song => `
+    <li>
+      <strong>${song.title}</strong> — ${song.artist} | ${song.genre} | ${formatDuration(song.duration)} | ${song.plays} plays
+    </li>
+  `).join("");
+
+  resultsBox.innerHTML = `<ul>${listItems}</ul>`;
+}
+
+function runPlaylistAnalyzer() {
+  const searchValue = document.getElementById("songSearch").value.trim().toLowerCase();
+  const genreValue = document.getElementById("genreFilter").value;
+  const sortValue = document.getElementById("sortOption").value;
+
+  let filtered = [...playlistData];
+
+  if (searchValue) {
+    filtered = filtered.filter(song =>
+      song.title.toLowerCase().includes(searchValue) ||
+      song.artist.toLowerCase().includes(searchValue)
+    );
+  }
+
+  if (genreValue !== "all") {
+    filtered = filtered.filter(song => song.genre === genreValue);
+  }
+
+  if (sortValue === "title") {
+    filtered.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortValue === "plays") {
+    filtered.sort((a, b) => b.plays - a.plays);
+  } else if (sortValue === "duration") {
+    filtered.sort((a, b) => a.duration - b.duration);
+  }
+
+  renderPlaylist(filtered);
+}
+
+function resetPlaylistAnalyzer() {
+  document.getElementById("songSearch").value = "";
+  document.getElementById("genreFilter").value = "all";
+  document.getElementById("sortOption").value = "title";
+  renderPlaylist(playlistData);
+}
+
+window.addEventListener("load", () => {
+  renderPlaylist(playlistData);
+});
 </script>
 </body>
 </html>

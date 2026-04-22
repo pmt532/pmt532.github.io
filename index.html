@@ -542,10 +542,7 @@
 }
 
 .playlist-stats{
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
+  margin-top: 6px;
   font-size: 14px;
   color: var(--muted);
 }
@@ -775,10 +772,9 @@ Filmed inside the National Museum of Qatar🇶🇦, reflecting parts of Qatari c
 </select>
 
       <select id="sortOption">
-        <option value="title">Sort by title</option>
-        <option value="plays">Sort by play count</option>
-        <option value="duration">Sort by duration</option>
-      </select>
+  <option value="title">Sort by title</option>
+  <option value="duration">Sort by duration</option>
+</select>
     </div>
 
     <div class="playlist-actions">
@@ -958,15 +954,14 @@ function renderPlaylist(items) {
   const topSong = items.reduce((top, song) => song.plays > top.plays ? song : top, items[0]);
 
   statsBox.innerHTML = `
-    <strong>Total songs:</strong> ${totalSongs}<br>
-    <strong>Most played:</strong> ${topSong.title} by ${topSong.artist}
-  `;
+  <strong>${totalSongs}</strong> song(s) found
+`;
 
   const listItems = items.map(song => `
-    <li>
-      <strong>${song.title}</strong> — ${song.artist} | ${song.genre} | ${formatDuration(song.duration)} 
-    </li>
-  `).join("");
+  <li>
+    <strong>${song.title}</strong> — ${song.artist}
+  </li>
+`).join("");
 
   resultsBox.innerHTML = `<ul>${listItems}</ul>`;
 }
@@ -996,20 +991,22 @@ function runPlaylistAnalyzer() {
   } else if (sortValue === "duration") {
     filtered.sort((a, b) => a.duration - b.duration);
   }
-
-  renderPlaylist(filtered);
+document.getElementById("playlistResults").style.display = "block";
+renderPlaylist(filtered);
 }
 
 function resetPlaylistAnalyzer() {
   document.getElementById("songSearch").value = "";
   document.getElementById("genreFilter").value = "all";
   document.getElementById("sortOption").value = "title";
+  document.getElementById("playlistResults").style.display = "none";
+  document.getElementById("playlistStats").innerHTML = "Explore my playlist.";
   renderPlaylist(playlistData);
 }
 
 window.addEventListener("load", () => {
-  document.getElementById("playlistResults").innerHTML = "";
-  document.getElementById("playlistStats").innerHTML = "Explore my playlist.";
+ document.getElementById("playlistResults").style.display = "none";
+document.getElementById("playlistStats").innerHTML = "Explore my playlist.";
 });
 </script>
 </body>

@@ -963,26 +963,22 @@ function renderPlaylist(items) {
 
 function runPlaylistAnalyzer() {
   const genreValue = document.getElementById("genreFilter").value;
-  const sortValue = document.getElementById("sortOption").value;
 
   let filtered = [...playlistData];
-
 
   if (genreValue !== "all") {
     filtered = filtered.filter(song => song.genre === genreValue);
   }
 
-document.getElementById("playlistResults").style.display = "block";
-renderPlaylist(filtered);
+  document.getElementById("playlistResults").style.display = "block";
+  renderPlaylist(filtered);
 }
 
 function resetPlaylistAnalyzer() {
-  document.getElementById("songSearch").value = "";
   document.getElementById("genreFilter").value = "all";
-  document.getElementById("sortOption").value = "title";
   document.getElementById("playlistResults").style.display = "none";
   document.getElementById("playlistStats").innerHTML = "Explore my playlist.";
-  renderPlaylist(playlistData);
+  document.getElementById("playlistResults").innerHTML = "";
 }
 
 window.addEventListener("load", () => {

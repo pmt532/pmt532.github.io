@@ -688,29 +688,25 @@
     </footer>
   </main>
 <section style="margin-top:30px;">
-  <div style="width:100vw; margin-left:calc(-50vw + 50%);">
-  <video autoplay muted loop playsinline controls 
-         style="width:100%; display:block; cursor:pointer;"
-         onclick="this.muted=false">
-    <source src="./york.mp4" type="video/mp4">
-  </video>
-</div>
+  <div style="width:100%; background:black;">
+    <video id="yorkVideo" muted controls playsinline style="width:100%; display:block; background:black;">
+      <source src="york.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
     📍 Life in York — click to enable sound
   </p>
 
-  <div style="width:100vw; margin-left:calc(-50vw + 50%); margin-top:30px;">
-  <video autoplay muted loop playsinline controls 
-         style="width:100%; display:block; cursor:pointer;"
-         onclick="this.muted=false">
-    <source src="./qatar.mp4" type="video/mp4">
-  </video>
-</div>
+  <div style="width:100%; background:black; margin-top:30px;">
+    <video id="qatarVideo" muted controls playsinline style="width:100%; display:block; background:black;">
+      <source src="qatar.mp4" type="video/mp4">
+    </video>
+  </div>
 
-<p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
-🇶🇦 Cultural perspective — tap video to enable sound
-</p>
+  <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
+    🇶🇦 Cultural perspective — click to enable sound
+  </p>
 </section>
   <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
 
@@ -773,6 +769,32 @@ formStatus.textContent = "Your message has been sent successfully.";
     } catch (error) {
       console.error("Connection error:", error);
       formStatus.textContent = "Connection error.";
+    }
+    } catch (error) {
+      console.error("Connection error:", error);
+      formStatus.textContent = "Connection error.";
+    }
+  });
+
+  // 👇 ADD THIS PART RIGHT HERE
+  window.addEventListener("load", () => {
+    const yorkVideo = document.getElementById("yorkVideo");
+    const qatarVideo = document.getElementById("qatarVideo");
+
+    if (yorkVideo) {
+      yorkVideo.play().catch(() => {});
+      yorkVideo.addEventListener("click", () => {
+        yorkVideo.muted = false;
+        yorkVideo.play().catch(() => {});
+      });
+    }
+
+    if (qatarVideo) {
+      qatarVideo.play().catch(() => {});
+      qatarVideo.addEventListener("click", () => {
+        qatarVideo.muted = false;
+        qatarVideo.play().catch(() => {});
+      });
     }
   });
 </script>

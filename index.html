@@ -471,7 +471,39 @@
       .grid-3{ grid-template-columns: 1fr; }
       .grid-2{ grid-template-columns: 1fr; }
       .form-row{ grid-template-columns: 1fr; }
-    }
+      .visual-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.media-video{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+}
+
+.media-video video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-caption{
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px){
+  .visual-grid{
+    grid-template-columns: 1fr;
+  }
+}
   </style>
 </head>
 
@@ -687,28 +719,35 @@
       © <span id="year"></span> Tamim • Built with GitHub Pages
     </footer>
   </main>
-<section style="margin-top:30px;">
-  <div style="width:100%; background:black;">
-    <video id="yorkVideo" controls preload="auto" style="width:100%; display:block; background:black;">
-      <source src="york.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-
-  <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
-    📍 Life in York
+<section id="visual-work" class="card section-card">
+  <h2 class="section-title">Visual Work</h2>
+  <p class="section-text">
+    These short videos reflect my interest in photography and places that are meaningful to me.
   </p>
 
-  <div style="width:100%; background:black; margin-top:30px;">
-    <video id="qatarVideo" controls preload="auto" style="width:100%; display:block; background:black;">
-      <source src="qatar.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+  <div class="visual-grid">
+    <div class="mini">
+      <h3>Life in York</h3>
+      <div class="media-video">
+        <video controls muted playsinline>
+          <source src="york.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p class="media-caption">A short video capturing the atmosphere of York, where I study.</p>
+    </div>
 
-  <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
-    🇶🇦 Cultural perspective
-  </p>
+    <div class="mini">
+      <h3>Cultural Perspective</h3>
+      <div class="media-video">
+        <video controls muted playsinline>
+          <source src="qatar.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p class="media-caption">A short video reflecting my interest in photography and my cultural background.</p>
+    </div>
+  </div>
 </section>
   <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
 
@@ -757,9 +796,7 @@
         ])
       });
 
-      const resultText = await response.text();
-      console.log("Status:", response.status);
-      console.log("Response text:", resultText);
+      await response.text();
 
       if (response.ok) {
         formStatus.textContent = "Your message has been sent successfully.";
@@ -767,98 +804,9 @@
       } else {
         formStatus.textContent = "There was a problem sending your message. Please try again.";
       }
-
     } catch (error) {
       console.error("Connection error:", error);
       formStatus.textContent = "Connection error.";
-    }
-  });
-
-  window.addEventListener("load", () => {
-    const yorkVideo = document.getElementById("yorkVideo");
-    const qatarVideo = document.getElementById("qatarVideo");
-
-    if (yorkVideo) {
-      yorkVideo.addEventListener("click", () => {
-        yorkVideo.play().catch(() => {});
-      });
-    }
-
-    if (qatarVideo) {
-      qatarVideo.addEventListener("click", () => {
-        qatarVideo.play().catch(() => {});
-      });
-    }
-  });
-</script>
-
-  contactForm.addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    formStatus.textContent = "Sending...";
-
-    try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_KEY,
-          "Authorization": `Bearer ${SUPABASE_KEY}`,
-          "Prefer": "return=representation"
-        },
-        body: JSON.stringify([
-          {
-            name: name,
-            email: email,
-            message: message
-          }
-        ])
-      });
-
-      const resultText = await response.text();
-console.log("Status:", response.status);
-console.log("Response text:", resultText);
-
-if (response.ok) {
-formStatus.textContent = "Your message has been sent successfully.";
-  contactForm.reset();
-} else {
- formStatus.textContent = "There was a problem sending your message. Please try again.";
-}
-
-    } catch (error) {
-      console.error("Connection error:", error);
-      formStatus.textContent = "Connection error.";
-    }
-    } catch (error) {
-      console.error("Connection error:", error);
-      formStatus.textContent = "Connection error.";
-    }
-  });
-
-  // 👇 ADD THIS PART RIGHT HERE
-  window.addEventListener("load", () => {
-    const yorkVideo = document.getElementById("yorkVideo");
-    const qatarVideo = document.getElementById("qatarVideo");
-
-    if (yorkVideo) {
-      yorkVideo.play().catch(() => {});
-      yorkVideo.addEventListener("click", () => {
-        yorkVideo.muted = false;
-        yorkVideo.play().catch(() => {});
-      });
-    }
-
-    if (qatarVideo) {
-      qatarVideo.play().catch(() => {});
-      qatarVideo.addEventListener("click", () => {
-        qatarVideo.muted = false;
-        qatarVideo.play().catch(() => {});
-      });
     }
   });
 </script>

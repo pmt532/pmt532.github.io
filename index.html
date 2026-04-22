@@ -726,7 +726,7 @@ A quiet moment captured in 𝓨𝓸𝓻𝓴 - the city where I study, explore, a
         </video>
       </div>
 <p class="media-caption">
-Filmed inside the National Museum of Qatar🇶🇦, reflecting parts of Qatari culture, history, and identity through the atmosphere presented throughout the museum.
+Filmed inside the National Museum of Qatar, reflecting parts of Qatari culture, history, and identity through the atmosphere presented throughout the museum.
 </p>
     </div>
   </div>
@@ -757,12 +757,11 @@ Filmed inside the National Museum of Qatar🇶🇦, reflecting parts of Qatari c
   </div>
 
   <p>
-    A small playlist demo that lets the user search, filter, and sort songs while viewing simple playlist statistics.
-  </p>
+  Explore a small selection of songs from my playlist by choosing a genre below.
+</p>
 
   <div class="playlist-box">
     <div class="playlist-controls">
-      <input type="text" id="songSearch" placeholder="Search by title or artist">
 
     <select id="genreFilter">
   <option value="all">All genres</option>
@@ -770,15 +769,11 @@ Filmed inside the National Museum of Qatar🇶🇦, reflecting parts of Qatari c
   <option value="Arabic">Arabic</option>
   <option value="Rap">Rap</option>
 </select>
-
-      <select id="sortOption">
-  <option value="title">Sort by title</option>
-  <option value="duration">Sort by duration</option>
-</select>
+      
     </div>
 
     <div class="playlist-actions">
-      <button class="btn" type="button" onclick="runPlaylistAnalyzer()">Show Results</button>
+      <button class="btn" type="button" onclick="runPlaylistAnalyzer()">Show Songs</button>
       <button class="btn secondary" type="button" onclick="resetPlaylistAnalyzer()">Reset</button>
     </div>
 
@@ -954,10 +949,10 @@ function renderPlaylist(items) {
   const topSong = items.reduce((top, song) => song.plays > top.plays ? song : top, items[0]);
 
   statsBox.innerHTML = `
-  <strong>${totalSongs}</strong> song(s) found
+ ${totalSongs} song(s) found
 `;
 
-  const listItems = items.map(song => `
+ const listItems = items.map(song => `
   <li>
     <strong>${song.title}</strong> — ${song.artist}
   </li>
@@ -967,30 +962,16 @@ function renderPlaylist(items) {
 }
 
 function runPlaylistAnalyzer() {
-  const searchValue = document.getElementById("songSearch").value.trim().toLowerCase();
   const genreValue = document.getElementById("genreFilter").value;
   const sortValue = document.getElementById("sortOption").value;
 
   let filtered = [...playlistData];
 
-  if (searchValue) {
-    filtered = filtered.filter(song =>
-      song.title.toLowerCase().includes(searchValue) ||
-      song.artist.toLowerCase().includes(searchValue)
-    );
-  }
 
   if (genreValue !== "all") {
     filtered = filtered.filter(song => song.genre === genreValue);
   }
 
-  if (sortValue === "title") {
-    filtered.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sortValue === "plays") {
-    filtered.sort((a, b) => b.plays - a.plays);
-  } else if (sortValue === "duration") {
-    filtered.sort((a, b) => a.duration - b.duration);
-  }
 document.getElementById("playlistResults").style.display = "block";
 renderPlaylist(filtered);
 }

@@ -955,18 +955,16 @@ function renderPlaylist(items) {
   }
 
   const totalSongs = items.length;
-  const totalPlays = items.reduce((sum, song) => sum + song.plays, 0);
   const topSong = items.reduce((top, song) => song.plays > top.plays ? song : top, items[0]);
 
   statsBox.innerHTML = `
     <strong>Total songs:</strong> ${totalSongs}<br>
-    <strong>Total plays:</strong> ${totalPlays}<br>
     <strong>Most played:</strong> ${topSong.title} by ${topSong.artist}
   `;
 
   const listItems = items.map(song => `
     <li>
-      <strong>${song.title}</strong> — ${song.artist} | ${song.genre} | ${formatDuration(song.duration)} | ${song.plays} plays
+      <strong>${song.title}</strong> — ${song.artist} | ${song.genre} | ${formatDuration(song.duration)} 
     </li>
   `).join("");
 
@@ -1010,7 +1008,8 @@ function resetPlaylistAnalyzer() {
 }
 
 window.addEventListener("load", () => {
-  renderPlaylist(playlistData);
+  document.getElementById("playlistResults").innerHTML = "";
+  document.getElementById("playlistStats").innerHTML = "Explore my playlist.";
 });
 </script>
 </body>

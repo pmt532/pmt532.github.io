@@ -689,26 +689,28 @@
   </main>
 <section style="margin-top:30px;">
   <div style="width:100vw; margin-left:calc(-50vw + 50%);">
-    <video style="width:100%; display:block;" autoplay muted loop playsinline controls>
-      <source src="york.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+  <video autoplay muted loop playsinline controls 
+         style="width:100%; display:block; cursor:pointer;"
+         onclick="this.muted=false">
+    <source src="./york.mp4" type="video/mp4">
+  </video>
+</div>
 
   <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
     📍 Life in York — click to enable sound
   </p>
 
   <div style="width:100vw; margin-left:calc(-50vw + 50%); margin-top:30px;">
-    <video style="width:100%; display:block;" autoplay muted loop playsinline controls>
-      <source src="qatar.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+  <video autoplay muted loop playsinline controls 
+         style="width:100%; display:block; cursor:pointer;"
+         onclick="this.muted=false">
+    <source src="./qatar.mp4" type="video/mp4">
+  </video>
+</div>
 
-  <p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
-    🇶🇦 Cultural perspective — click to enable sound
-  </p>
+<p style="text-align:center; margin-top:8px; font-size:14px; color:#ccc;">
+🇶🇦 Cultural perspective — tap video to enable sound
+</p>
 </section>
   <button class="top-btn" id="topBtn" aria-label="Back to top">↑ Top</button>
 

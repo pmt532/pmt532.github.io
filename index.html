@@ -152,22 +152,28 @@
     }
 
     .hero-main{
-      padding: 22px;
-      position: relative;
-      overflow: hidden;
-    }
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgba(26,36,26,0.58), rgba(26,36,26,0.72)),
+    url("hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
 
-    .hero-main:before{
-      content:"";
-      position:absolute;
-      inset:-80px -80px auto auto;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle at 30% 30%, rgba(201,180,88,0.22), transparent 60%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-
+  .hero-main:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(2px);
+  background: rgba(0,0,0,0.08);
+  pointer-events:none;
+}
+    .hero-main > *{
+  position: relative;
+  z-index: 1;
+}
     .kicker{
       display:inline-flex;
       gap: 10px;
@@ -690,27 +696,11 @@
           <img class="avatar" src="https://www.gravatar.com/avatar/2b33b4801c70491ba204d6d7490b4747cde8079e44138585883b306377ebbcb3?size=256&d=identicon" alt="Profile photo">
           <div>
             <h2>Computer Science Student</h2>
-            <p>Learning web development and building simple, well-structured pages.</p>
+           <p>Exploring design, interactive ideas, and digital creativity.</p>
           </div>
         </div>
 
-        <div class="quick">
-          <p class="quick-title">Technical Focus</p>
-          <div class="quick-grid">
-            <div><strong>Web Fundamentals:</strong> HTML structure and layout.</div>
-            <div><strong>Version Control:</strong> GitHub workflow and publishing updates.</div>
-            <div><strong>Development:</strong> Improving page organisation and clarity.</div>
-          </div>
-        </div>
-
-        <div class="quick">
-          <p class="quick-title">Current Goals</p>
-          <div class="quick-grid">
-            <div>Improve design consistency across sections.</div>
-            <div>Add more developed project content.</div>
-            <div>Continue learning basic front-end development.</div>
-          </div>
-        </div>
+        
       </div>
     </div>
 

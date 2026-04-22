@@ -646,7 +646,7 @@
         </div>
 
         <button type="submit" class="btn">Send Message</button>
-        <p class="form-note">This form is ready for the front-end design. It can later be connected to Supabase for live submissions and email notifications.</p>
+        <p>This form is connected to a database using Supabase and stores submitted messages securely.</p>
         <p id="formStatus" class="form-status"></p>
       </form>
     </section>
@@ -740,10 +740,10 @@ console.log("Status:", response.status);
 console.log("Response text:", resultText);
 
 if (response.ok) {
-  formStatus.textContent = "Message sent successfully. Status: " + response.status;
+formStatus.textContent = "Your message has been sent successfully.";
   contactForm.reset();
 } else {
-  formStatus.textContent = "Error sending message. Status: " + response.status;
+ formStatus.textContent = "There was a problem sending your message. Please try again.";
 }
 
     } catch (error) {

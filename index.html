@@ -472,15 +472,21 @@
       .grid-2{ grid-template-columns: 1fr; }
       .form-row{ grid-template-columns: 1fr; }
 .visual-grid{
-  display:grid;
-  grid-template-columns: 1fr;
+  display: grid;
   gap: 18px;
   margin-top: 12px;
 }
 
+.media-card{
+  padding: 14px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
 .media-video{
   width: 100%;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   background: #000;
 }
@@ -489,9 +495,7 @@
   width: 100%;
   height: auto;
   display: block;
-  background: #000;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
+  border-radius: 14px;
 }
 
 .media-caption{
@@ -632,27 +636,32 @@
     These short videos reflect my interest in photography and places that are meaningful to me.
   </p>
 
-<div class="mini">
-  <h3>Life in York</h3>
-  <div class="media-video">
-    <video controls muted playsinline>
-      <source src="york.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <p class="media-caption">A short video capturing the atmosphere of York, where I study.</p>
-</div>
+  <div class="visual-grid">
 
-<div class="mini">
-  <h3>Cultural Perspective</h3>
-  <div class="media-video">
-    <video controls muted playsinline>
-      <source src="qatar.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <p class="media-caption">A short video reflecting my interest in photography and my cultural background.</p>
-</div>
+    <div class="media-card">
+      <h3>Life in York</h3>
+      <div class="media-video">
+        <video controls muted playsinline>
+          <source src="york.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="media-caption">
+        A short video capturing the atmosphere of York, where I study.
+      </p>
+    </div>
+
+    <div class="media-card">
+      <h3>Cultural Perspective</h3>
+      <div class="media-video">
+        <video controls muted playsinline>
+          <source src="qatar.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="media-caption">
+        A short video reflecting my interest in photography and my cultural background.
+      </p>
+    </div>
+
   </div>
 </section>
   

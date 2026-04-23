@@ -142,6 +142,34 @@
   width: 100%;
   justify-content: center;
 }
+    .mini-wide{
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.mini-wide-text{
+  flex: 1;
+  max-width: 620px;
+}
+
+.mini-wide .interest-images{
+  display: flex;
+  gap: 14px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.mini-wide .interest-images img{
+  width: 150px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
 @media (max-width: 900px){
   .cover-image{
     height: 180px;
@@ -663,6 +691,20 @@ background-position: center 35%;
   .grid-3{ grid-template-columns: 1fr; }
   .grid-2{ grid-template-columns: 1fr; }
   .form-row{ grid-template-columns: 1fr; }
+  .mini-wide{
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mini-wide .interest-images{
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.mini-wide .interest-images img{
+  width: 120px;
+  height: 150px;
+}
 }
   </style>
 </head>
@@ -712,7 +754,18 @@ background-position: center 35%;
           <a class="btn secondary" href="https://www.york.ac.uk" target="_blank">University of York</a>
           <a class="btn secondary" href="#projects">See Projects</a>
         </div>
-        
+        <div class="quick compact-skills" id="skills">
+  <p class="quick-title">Skills</p>
+
+  <div class="pills hero-skill-pills">
+    <span class="pill gold">HTML</span>
+    <span class="pill">Git & GitHub</span>
+    <span class="pill">Web Design</span>
+    <span class="pill">Interactive Features</span>
+    <span class="pill">Problem Solving</span>
+    <span class="pill">Frontend Basics</span>
+  </div>
+</div>
       </div>
     </div>
 
@@ -732,22 +785,6 @@ background-position: center 35%;
           <p>Better layouts, stronger project presentation, and more consistent design.</p>
         </div>
       </div>
-    </section>
-
-    <section id="skills" class="card section-card">
-      <h2 class="section-title">Skills</h2>
-      <p class="section-text">
-        Some skills I have been improving through my projects and coursework.</p>
-      </p>
-
-     <div class="tags skill-tags">
-  <span class="tag">HTML</span>
-  <span class="tag">Git & GitHub</span>
-  <span class="tag">Web Design</span>
-  <span class="tag">Interactive Features</span>
-  <span class="tag">Problem Solving</span>
-  <span class="tag">Frontend Basics</span>
-</div>
     </section>
 
    <section id="interests" class="card section-card">
@@ -778,16 +815,18 @@ background-position: center 35%;
     I enjoy working on creative digital projects that allow me to combine design, organisation, and interactive ideas.
   </p>
 </div>
-        <div class="mini">
-  <h3>Casual Adventures</h3>
+    <div class="mini mini-wide">
+  <div class="mini-wide-text">
+    <h3>Casual Adventures</h3>
 
-  <p>
-    I enjoy trying different activities and experiences, especially the kind that let me get out, explore new places, and do something a little different from my usual routine.
-  </p>
+    <p>
+      I enjoy trying different activities and experiences, especially the kind that let me get out, explore new places, and do something a little different from my usual routine.
+    </p>
+  </div>
 
   <div class="interest-images">
-   <img src="paddle-board.jpg" alt="Paddle boarding activity" onclick="openImage(this.src)">
-<img src="casual-adventure.jpg" alt="Outdoor activity" onclick="openImage(this.src)">
+    <img src="paddle-board.jpg" alt="Paddle boarding activity" onclick="openImage(this.src)">
+    <img src="casual-adventure.jpg" alt="Outdoor activity" onclick="openImage(this.src)">
   </div>
 </div>
 </div>
